@@ -1,0 +1,11 @@
+# Search for BOM in rdfs label
+# Quote: https://en.wikipedia.org/wiki/Byte_order_mark
+# In UTF-16, a BOM ( U+FEFF ) may be placed as the first character of a file or character stream to indicate the endianness (byte order) of all the 16-bit code units of the file or stream.
+SELECT ?subject ?predicate ?literal
+WHERE {
+    VALUES ?predicate { <http://www.w3.org/2000/01/rdf-schema#label> }
+
+    ?subject ?predicate ?literal .
+
+    FILTER regex(?literal, '[\uFEFF]')
+}
